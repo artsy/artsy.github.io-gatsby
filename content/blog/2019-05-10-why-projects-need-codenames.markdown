@@ -1,7 +1,7 @@
 ---
 layout: epic
 title: Why Projects Need Code Names
-date: 2019-05-10
+date: "2019-05-10"
 author: [joey]
 categories: [engineering, git, github]
 ---

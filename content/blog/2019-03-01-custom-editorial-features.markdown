@@ -1,8 +1,8 @@
 ---
 layout: post
 title: The Anatomy of an Editorial Feature
-date: 2019-03-05
-author: eve
+date: "2019-03-05"
+author: [eve]
 categories: [reaction, javascript, publishing]
 ---
 
