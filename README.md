@@ -1,6 +1,6 @@
 # Artsy Engineering Blog
 
-> Building...
+Building...
 
 
 
