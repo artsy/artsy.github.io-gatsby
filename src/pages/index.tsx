@@ -36,13 +36,17 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
     const posts = data.allMarkdownRemark.edges
 
     return (
+      <div
+      style={{
+        background : 'blue',
+      }}>
       <Layout>
         <SEO
           title="All posts"
           keywords={['blog', 'gatsby', 'javascript', 'react']}
         />
         <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-          <Image />
+        Something
         </div>
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
@@ -63,6 +67,7 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
           )
         })}
       </Layout>
+      </div>
     )
   }
 }

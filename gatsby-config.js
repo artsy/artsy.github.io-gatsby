@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Typescript Starter Blog',
+    title: 'Artsy Engineering blog',
     description:
-      'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@gatsbyjs',
+      'Engineering blog!',
+    author: '@Artsy',
   },
   plugins: [
     {
@@ -61,7 +61,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        icon : 'src/images/artsy_logo copy.png',
       },
     },
     'gatsby-plugin-offline',

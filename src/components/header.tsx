@@ -8,7 +8,6 @@ interface HeaderProps {
 const Header: React.SFC<HeaderProps> = ({ siteTitle }) => (
   <div
     style={{
-      background: 'rebeccapurple',
       marginBottom: '1.45rem',
     }}
   >
@@ -23,7 +22,7 @@ const Header: React.SFC<HeaderProps> = ({ siteTitle }) => (
         <Link
           to="/"
           style={{
-            color: 'white',
+            color: 'Black',
             textDecoration: 'none',
           }}
         >
