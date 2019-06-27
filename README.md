@@ -11,6 +11,7 @@ Building...
 ## Geting started
 
 npm install 
+<br>
 gatsby develop
 
 
