@@ -20,7 +20,7 @@ const Layout: React.SFC = ({ children }) => (
         <div
           style={{
             margin: '0 auto',
-            maxWidth: '40rem',
+            maxWidth: '55rem',
             padding: '0px 1.0875rem 1.45rem',
             paddingTop: 0,
           }}

@@ -36,10 +36,7 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
     const posts = data.allMarkdownRemark.edges
 
     return (
-      <div
-      style={{
-        background : 'blue',
-      }}>
+      <div>
       <Layout>
         <SEO
           title="All posts"
