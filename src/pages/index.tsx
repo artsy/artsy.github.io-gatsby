@@ -1,6 +1,5 @@
 import { graphql, Link } from 'gatsby'
 import * as React from 'react'
-import Image from '../components/image'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
@@ -10,6 +9,7 @@ interface PostNode {
     frontmatter: {
       date: string
       title: string
+      author: string
     }
     fields: {
       slug: string
@@ -38,13 +38,12 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
     return (
       <div>
       <Layout>
+      
         <SEO
           title="All posts"
           keywords={['blog', 'gatsby', 'javascript', 'react']}
         />
-        <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-        Something
-        </div>
+        
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
@@ -59,6 +58,8 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
                 </Link>
               </h3>
               <small>{node.frontmatter.date}</small>
+              <br/>
+              <small>{node.frontmatter.author}</small>
               <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
             </div>
           )
@@ -88,6 +89,7 @@ export const pageQuery = graphql`
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
+            author
           }
         }
       }
