@@ -7,6 +7,31 @@ module.exports = {
   },
   plugins: [
     {
+      resolve : 'gatsby-plugin-lunr',
+      options:{
+        languages:[{name:'en'}],
+        filterNodes: node => !node.frontmatter || node.frontmatter.draft !== true,
+        fields:[
+          {name:'title',store:true},
+          {name:'author',store:true},
+          {name:'categories',store:true},
+          {name:'series'},
+          {name:'date'}
+        ],
+        resolvers:{
+          MarkdownRemark:{
+            title : node=>node.frontmatter.title,
+            author : node=>node.frontmatter.author,
+            categories : node=>node.frontmatter.categories,
+            series : node=>node.frontmatter.series,
+            date : node=>node.frontmatter.date,
+          },
+        },
+        filename:'search_index.json',
+      },
+
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,

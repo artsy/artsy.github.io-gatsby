@@ -1,14 +1,12 @@
-import { Link } from 'gatsby'
+
 import * as React from 'react'
 import '../../src/globalcss.css'
 
 
-interface HeaderProps {
-  siteTitle?: string
-}
 
 
-const Header: React.SFC<HeaderProps> = ({ siteTitle }) => (
+
+const Header: React.SFC = ({ }) => (
   
 <div
     style={{
@@ -35,34 +33,7 @@ const Header: React.SFC<HeaderProps> = ({ siteTitle }) => (
       open source  
       </li>
       </ul>
-
-      <div
-      style={{
-        margin: '0 auto',
-        maxWidth: '40rem',
-        padding: '1.45rem 1.0875rem',
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: 'Black',
-            textDecoration: 'none',
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-      
-      </div>
   </div>
 )
-
-Header.defaultProps = {
-  siteTitle: '',
-}
-
-
 
 export default Header
