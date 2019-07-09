@@ -12,11 +12,11 @@ module.exports = {
         languages:[{name:'en'}],
         filterNodes: node => !node.frontmatter || node.frontmatter.draft !== true,
         fields:[
+          {name:'date',store:true},
           {name:'title',store:true},
           {name:'author',store:true},
           {name:'categories',store:true},
           {name:'series'},
-          {name:'date'}
         ],
         resolvers:{
           MarkdownRemark:{

@@ -69,8 +69,7 @@ export class Search extends React.Component<LunrSearchProps, LunrSearchState> {
             {this.state.results.slice(0, limit).map((result, index) => (
               
               <li key={index}>
-              
-                <Link to={result.date}>
+                <Link to={result.title}>
                   {result.title}
                   <br />
                 </Link>

@@ -3,6 +3,7 @@ import * as React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
+
 interface PostNode {
   node: {
     excerpt: string
@@ -46,8 +47,14 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
         
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
+          const temp = node.frontmatter.author
+          const author = temp
+
           return (
+            
+            
             <div key={node.fields.slug}>
+            
               <h3
                 style={{
                   marginBottom: '0.25rem',
@@ -59,7 +66,7 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
               </h3>
               <small>{node.frontmatter.date}</small>
               <br/>
-              <small>{node.frontmatter.author}</small>
+              <small>{author}</small>
               <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
             </div>
           )
