@@ -39,10 +39,10 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
     return (
       <div>
       <Layout>
-      
+        
         <SEO
           title="All posts"
-          keywords={['blog', 'gatsby', 'javascript', 'react']}
+          keywords={['artsy','blog', 'gatsby', 'javascript', 'react']}
         />
         
         {posts.map(({ node }) => {
@@ -54,7 +54,9 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
             
             
             <div key={node.fields.slug}>
-            
+            <h2><Link to="/categories">
+              Go to categories page! </Link>
+              </h2>
               <h3
                 style={{
                   marginBottom: '0.25rem',
