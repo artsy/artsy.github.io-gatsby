@@ -40,9 +40,10 @@ exports.createPages = ({ graphql, actions }) => {
           const previous =
             index === posts.length - 1 ? null : posts[index + 1].node
           const next = index === 0 ? null : posts[index - 1].node
+          const blogPath = `${post.node.frontmatter.title.replace(/[^a-zA-Z0-9 ]/g, "")}`
 
           createPage({
-            path: post.node.fields.slug,
+            path: blogPath,
             component: blogPost,
             context: {
               slug: post.node.fields.slug,
@@ -62,9 +63,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
     createNodeField({
-      name: `slug`,
+      name : `slug`,
       node,
-      value: slug
+      value 
     })
   }
 }

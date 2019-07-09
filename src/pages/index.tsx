@@ -60,7 +60,7 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
                   marginBottom: '0.25rem',
                 }}
               >
-                <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
+                <Link style={{ boxShadow: 'none' }} to={title}>
                   {title}
                 </Link>
               </h3>
