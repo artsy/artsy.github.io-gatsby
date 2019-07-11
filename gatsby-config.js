@@ -1,11 +1,16 @@
 module.exports = {
   siteMetadata: {
     title: 'Artsy Engineering blog',
-    description:
-      'Engineering blog!',
+    description:'Engineering blog!',
     author: '@Artsy',
   },
   plugins: [
+    {
+      resolve : `gatsby-plugin-lodash`,
+      options :{
+        disableFeatures : [`shorthands`,`cloning`],
+      },
+    },
     {
       resolve : 'gatsby-plugin-lunr',
       options:{
@@ -76,6 +81,7 @@ module.exports = {
         ],
       },
     },
+
     'gatsby-plugin-typescript',
     'gatsby-plugin-react-helmet',
     {

@@ -1,6 +1,5 @@
-import { graphql, StaticQuery } from 'gatsby'
+import { graphql, Link, StaticQuery} from 'gatsby'
 import * as React from 'react'
-
 import Header from './header'
 import Neck from './neck'
 import {Search} from './search'
@@ -21,6 +20,7 @@ const Layout: React.SFC = ({ children }) => (
         <Neck siteTitle={data.site.siteMetadata.title}/>
         <Header />
         <Search />
+        
         <div
           style={{
             margin: '0 auto',
@@ -29,6 +29,9 @@ const Layout: React.SFC = ({ children }) => (
             paddingTop: 0,
           }}
         >
+        <h2><Link to="/categories">
+              categories page! </Link>
+              </h2>
           {children}
         </div>
       </>

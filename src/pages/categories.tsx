@@ -3,58 +3,39 @@ import * as React from 'react'
 import Layout from '../components/layout'
 
 
-interface Categories{
-  element : string
-}
 
-interface PostNode {
-    node: {
-      frontmatter: {
-        date: string
-        title: string
-        categories : Categories[]
-      }
-      fields: {
-        slug: string
-      }
+interface CategoriesPageProps {
+  readonly data : {
+    readonly allMarkdownRemark :{
+      readonly group : [{
+        readonly fieldValue : string
+        readonly totalCount : number
+      }]
     }
   }
-  
-  interface CategoriesPageProps {
-    data: {
-      site: {
-        siteMetadata: {
-          siteName: string
-        }
-      }
-      allMarkdownRemark: {
-        edges: PostNode[]
-      }
-    }
-  }
+}
   
   class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
     render() {
-      const { data } = this.props
-      const posts = data.allMarkdownRemark.edges
-      const indexLetter = 65
-  
+        const {data} = this.props
+        const amd = data.allMarkdownRemark
+       
+        
       return (
         <div>
+        
         <Layout>
-          {posts.map(({ node }) => {
-            const title = node.frontmatter.title 
-            const categorie = node.frontmatter.categories
-            {categorie.map(({element}) => {
-            return (
-                
-              <div key={element}>
-                <h2>{String.fromCharCode(indexLetter)}</h2>
-                
-                <br/>
-              </div>
-            )
-           }) } })}
+        <h3>Categorie we have :</h3>
+        <ul>
+          {amd.group.map(cateSingle => (
+            <li key={cateSingle.fieldValue}>
+            {cateSingle.fieldValue} :  {cateSingle.totalCount} 
+            <br/>
+            </li>
+          )
+            )}
+        
+        </ul>
         </Layout>
         </div>
       )
@@ -65,25 +46,11 @@ interface PostNode {
   
   export const pageQuery = graphql`
     query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-      allMarkdownRemark(sort: { fields: [frontmatter___title], order: DESC }) {
-        edges {
-          node {
-            excerpt
-            fields {
-              slug
-            }
-            frontmatter {
-              date(formatString: "MMMM DD, YYYY")
-              title
-              categories
-            }
-          }
-        }
-      }
+     allMarkdownRemark{
+       group(field: frontmatter___categories){
+         fieldValue
+         totalCount
+       }
+     }
     }
   `

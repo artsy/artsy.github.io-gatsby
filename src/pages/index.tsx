@@ -51,18 +51,13 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
           const author = temp
 
           return (
-            
-            
             <div key={node.fields.slug}>
-            <h2><Link to="/categories">
-              Go to categories page! </Link>
-              </h2>
               <h3
                 style={{
                   marginBottom: '0.25rem',
                 }}
               >
-                <Link style={{ boxShadow: 'none' }} to={title}>
+                <Link to={title}>
                   {title}
                 </Link>
               </h3>
