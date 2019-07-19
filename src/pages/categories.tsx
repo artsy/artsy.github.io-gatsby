@@ -1,5 +1,6 @@
 import { graphql, Link } from 'gatsby'
 import * as React from 'react'
+import CateSort from '../components/cateSort'
 import Layout from '../components/layout'
 
 
@@ -19,6 +20,7 @@ interface CategoriesPageProps {
     render() {
         const {data} = this.props
         const amd = data.allMarkdownRemark
+        
        
         
       return (
@@ -26,12 +28,25 @@ interface CategoriesPageProps {
         
         <Layout>
         <h3>Categorie we have :</h3>
+        
         <ul>
-          {amd.group.map(cateSingle => (
-            <li key={cateSingle.fieldValue}>
-            {cateSingle.fieldValue} :  {cateSingle.totalCount} 
+          <h1>a</h1>
+          -----------------------------------------
+          {amd.group.map((cateSingle,index) => (
+            
+            <li key={index}>
+            
+            
+
+            <CateSort currentIndex={cateSingle.fieldValue} 
+                      preIndex = {index<1 ? amd.group[index].fieldValue
+                        : amd.group[index-1].fieldValue} 
+                      numOfBlog = {cateSingle.totalCount}/>
+            
             <br/>
+            
             </li>
+            
           )
             )}
         
