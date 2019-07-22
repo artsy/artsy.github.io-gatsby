@@ -3,7 +3,6 @@ import * as React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-
 interface PostNode {
   node: {
     excerpt: string
@@ -38,37 +37,34 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
 
     return (
       <div>
-      <Layout>
-        
-        <SEO
-          title="All posts"
-          keywords={['artsy','blog', 'gatsby', 'javascript', 'react']}
-        />
-        
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug
-          const temp = node.frontmatter.author
-          const author = temp
+        <Layout>
+          <SEO
+            title="All posts"
+            keywords={['artsy', 'blog', 'gatsby', 'javascript', 'react']}
+          />
 
-          return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: '0.25rem',
-                }}
-              >
-                <Link to={title}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <br/>
-              <small>{author}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            </div>
-          )
-        })}
-      </Layout>
+          {posts.map(({ node }) => {
+            const title = node.frontmatter.title || node.fields.slug
+            const temp = node.frontmatter.author
+            const author = temp
+
+            return (
+              <div key={node.fields.slug}>
+                <h3
+                  style={{
+                    marginBottom: '0.25rem',
+                  }}
+                >
+                  <Link to={title}>{title}</Link>
+                </h3>
+                <small>{node.frontmatter.date}</small>
+                <br />
+                <small>{author}</small>
+                <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+              </div>
+            )
+          })}
+        </Layout>
       </div>
     )
   }

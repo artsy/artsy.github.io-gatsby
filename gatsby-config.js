@@ -1,41 +1,40 @@
 module.exports = {
   siteMetadata: {
     title: 'Artsy Engineering blog',
-    description:'Engineering blog!',
+    description: 'Engineering blog!',
     author: '@Artsy',
   },
   plugins: [
     {
-      resolve : `gatsby-plugin-lodash`,
-      options :{
-        disableFeatures : [`shorthands`,`cloning`],
+      resolve: `gatsby-plugin-lodash`,
+      options: {
+        disableFeatures: [`shorthands`, `cloning`],
       },
     },
     {
-      resolve : 'gatsby-plugin-lunr',
-      options:{
-        languages:[{name:'en'}],
-        filterNodes: node => !node.frontmatter || node.frontmatter.draft !== true,
-        fields:[
-          
-          {name:'date',store:true},
-          {name:'title',store:true},
-          {name:'author',store:true},
-          {name:'categories',store:true},
-          {name:'series'},
+      resolve: 'gatsby-plugin-lunr',
+      options: {
+        languages: [{ name: 'en' }],
+        filterNodes: node =>
+          !node.frontmatter || node.frontmatter.draft !== true,
+        fields: [
+          { name: 'date', store: true },
+          { name: 'title', store: true },
+          { name: 'author', store: true },
+          { name: 'categories', store: true },
+          { name: 'series' },
         ],
-        resolvers:{
-          MarkdownRemark:{
-            title : node=>node.frontmatter.title,
-            author : node=>node.frontmatter.author,
-            categories : node=>node.frontmatter.categories,
-            series : node=>node.frontmatter.series,
-            date : node=>node.frontmatter.date,
+        resolvers: {
+          MarkdownRemark: {
+            title: node => node.frontmatter.title,
+            author: node => node.frontmatter.author,
+            categories: node => node.frontmatter.categories,
+            series: node => node.frontmatter.series,
+            date: node => node.frontmatter.date,
           },
         },
-        filename:'search_index.json',
+        filename: 'search_index.json',
       },
-
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -56,13 +55,13 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve:`gatsby-remark-embed-video`,
-            options:{
-              width:800,
-              height:400,
-              related:false,
-              noIframeBorder:true
-            }
+            resolve: `gatsby-remark-embed-video`,
+            options: {
+              width: 800,
+              height: 400,
+              related: false,
+              noIframeBorder: true,
+            },
           },
           {
             resolve: `gatsby-remark-images`,
@@ -102,7 +101,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon : 'src/images/artsy_logo copy.png',
+        icon: 'src/images/artsy_logo copy.png',
       },
     },
     'gatsby-plugin-offline',
