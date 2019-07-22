@@ -3,12 +3,11 @@ const { createFilePath } = require('gatsby-source-filesystem')
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
-  
 
   return new Promise((resolve, reject) => {
     const blogPost = path.resolve('./src/templates/blog-post.tsx')
     const catePage = path.resolve('./src/templates/cate-template.tsx')
-    
+
     resolve(
       graphql(
         `
@@ -17,7 +16,7 @@ exports.createPages = ({ graphql, actions }) => {
               sort: { fields: [frontmatter___date], order: DESC }
               limit: 1000
             ) {
-              group(field:frontmatter___categories){
+              group(field: frontmatter___categories) {
                 fieldValue
               }
               edges {
@@ -42,24 +41,25 @@ exports.createPages = ({ graphql, actions }) => {
         // Create blog posts pages.
         const posts = result.data.allMarkdownRemark.edges
 
-
-        result.data.allMarkdownRemark.group.forEach((cate)=>{
+        result.data.allMarkdownRemark.group.forEach(cate => {
           const path = cate.fieldValue
           createPage({
             path,
-            component:catePage,
-            context:{
-              cate : cate.fieldValue
-            }
+            component: catePage,
+            context: {
+              cate: cate.fieldValue,
+            },
           })
-        }
-        )
+        })
 
         posts.forEach((post, index) => {
           const previous =
             index === posts.length - 1 ? null : posts[index + 1].node
           const next = index === 0 ? null : posts[index - 1].node
-          const blogPath = `${post.node.frontmatter.title.replace(/[^a-zA-Z0-9 ]/g, "")}`
+          const blogPath = `${post.node.frontmatter.title.replace(
+            /[^a-zA-Z0-9 ]/g,
+            ''
+          )}`
 
           createPage({
             path: blogPath,
@@ -71,8 +71,6 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
-
-        
       })
     )
   })
@@ -80,14 +78,13 @@ exports.createPages = ({ graphql, actions }) => {
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
-  
 
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
     createNodeField({
-      name : `slug`,
+      name: `slug`,
       node,
-      value 
+      value,
     })
   }
 }

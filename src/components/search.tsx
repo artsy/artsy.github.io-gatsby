@@ -1,14 +1,12 @@
-import {graphql,Link,StaticQuery} from 'gatsby'
+import { graphql, Link, StaticQuery } from 'gatsby'
 import React, { ChangeEvent } from 'react'
 
 import ReactDOM from 'react-dom'
 
-
 const search = (query: string): ReadonlyArray<SearchResult> => {
   const { index, store } = window.__LUNR__ && window.__LUNR__.en
- 
+
   return query ? index.search(query).map(({ ref }) => store[ref]) : []
-  
 }
 
 interface LunrSearchProps {
@@ -26,7 +24,6 @@ export class Search extends React.Component<LunrSearchProps, LunrSearchState> {
     isActive: false,
     query: '',
     results: [],
-    
   }
 
   readonly handleSearch = (event: ChangeEvent<{ readonly value: string }>) => {
@@ -37,7 +34,8 @@ export class Search extends React.Component<LunrSearchProps, LunrSearchState> {
 
   readonly handleClickOutside = (ev: Event) => {
     const element = ReactDOM.findDOMNode(this)
-    const isActive = !!this.state.query && !!element && element.contains(ev.target as Node)
+    const isActive =
+      !!this.state.query && !!element && element.contains(ev.target as Node)
     this.setState(() => ({ isActive }))
   }
 
@@ -62,12 +60,10 @@ export class Search extends React.Component<LunrSearchProps, LunrSearchState> {
             value={this.state.query}
             onChange={this.handleSearch}
           />
-
         </label>
         {this.state.isActive ? (
           <ul>
             {this.state.results.slice(0, limit).map((result, index) => (
-              
               <li key={index}>
                 <Link to={result.title}>
                   {result.title}
