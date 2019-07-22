@@ -65,5 +65,11 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true
   }
 }
