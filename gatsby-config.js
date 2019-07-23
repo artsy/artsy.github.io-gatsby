@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Artsy Engineering blog',
-    description: 'Engineering blog!',
-    author: '@Artsy',
+    title: "Artsy Engineering blog",
+    description: "Engineering blog!",
+    author: "@Artsy",
   },
   plugins: [
     {
@@ -12,17 +12,17 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-lunr',
+      resolve: "gatsby-plugin-lunr",
       options: {
-        languages: [{ name: 'en' }],
+        languages: [{ name: "en" }],
         filterNodes: node =>
           !node.frontmatter || node.frontmatter.draft !== true,
         fields: [
-          { name: 'date', store: true },
-          { name: 'title', store: true },
-          { name: 'author', store: true },
-          { name: 'categories', store: true },
-          { name: 'series' },
+          { name: "date", store: true },
+          { name: "title", store: true },
+          { name: "author", store: true },
+          { name: "categories", store: true },
+          { name: "series" },
         ],
         resolvers: {
           MarkdownRemark: {
@@ -33,21 +33,21 @@ module.exports = {
             date: node => node.frontmatter.date,
           },
         },
-        filename: 'search_index.json',
+        filename: "search_index.json",
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
-        name: 'blog',
+        name: "blog",
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/content/assets`,
-        name: 'assets',
+        name: "assets",
       },
     },
     {
@@ -70,10 +70,10 @@ module.exports = {
             },
           },
           {
-            resolve: 'gatsby-remark-external-links',
+            resolve: "gatsby-remark-external-links",
             options: {
-              target: '_blank',
-              rel: 'nofollow noopener noreferrer',
+              target: "_blank",
+              rel: "nofollow noopener noreferrer",
             },
           },
           `gatsby-remark-responsive-iframe`,
@@ -81,8 +81,8 @@ module.exports = {
       },
     },
 
-    'gatsby-plugin-typescript',
-    'gatsby-plugin-react-helmet',
+    "gatsby-plugin-typescript",
+    "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -90,20 +90,20 @@ module.exports = {
         path: `${__dirname}/content/blog/images`,
       },
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
-        start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
-        display: 'minimal-ui',
-        icon: 'src/images/artsy_logo copy.png',
+        name: "gatsby-starter-default",
+        short_name: "starter",
+        start_url: "/",
+        background_color: "#663399",
+        theme_color: "#663399",
+        display: "minimal-ui",
+        icon: "src/images/artsy_logo copy.png",
       },
     },
-    'gatsby-plugin-offline',
+    "gatsby-plugin-offline",
   ],
 }

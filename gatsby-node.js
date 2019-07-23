@@ -1,12 +1,13 @@
-const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
+const path = require("path")
+const _ = require("lodash")
+const { createFilePath } = require("gatsby-source-filesystem")
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   return new Promise((resolve, reject) => {
-    const blogPost = path.resolve('./src/templates/blog-post.tsx')
-    const catePage = path.resolve('./src/templates/cate-template.tsx')
+    const blogPost = path.resolve("./src/templates/blog-post.tsx")
+    const catePage = path.resolve("./src/templates/cate-template.tsx")
 
     resolve(
       graphql(
@@ -42,7 +43,7 @@ exports.createPages = ({ graphql, actions }) => {
         const posts = result.data.allMarkdownRemark.edges
 
         result.data.allMarkdownRemark.group.forEach(cate => {
-          const path = cate.fieldValue
+          const path = `/categories/${cate.fieldValue}`
           createPage({
             path,
             component: catePage,
@@ -56,10 +57,7 @@ exports.createPages = ({ graphql, actions }) => {
           const previous =
             index === posts.length - 1 ? null : posts[index + 1].node
           const next = index === 0 ? null : posts[index - 1].node
-          const blogPath = `${post.node.frontmatter.title.replace(
-            /[^a-zA-Z0-9 ]/g,
-            ''
-          )}`
+          const blogPath = `/blogs/${_.kebabCase(post.node.frontmatter.title)}`
 
           createPage({
             path: blogPath,

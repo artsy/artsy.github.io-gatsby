@@ -1,15 +1,15 @@
-import * as React from 'react'
-import '../../src/globalcss.css'
+import * as React from "react"
+import "../../src/globalcss.css"
 
 const Header: React.SFC = ({}) => (
   <div
     style={{
-      marginBottom: '1.45rem',
+      marginBottom: "1.45rem",
     }}
   >
     <ul
       style={{
-        top: '30px',
+        top: "30px",
       }}
     >
       <li>

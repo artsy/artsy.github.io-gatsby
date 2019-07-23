@@ -1,6 +1,6 @@
-import { graphql, Link, StaticQuery } from 'gatsby'
-import React from 'react'
-import Header from './header'
+import { graphql, Link, StaticQuery } from "gatsby"
+import React from "react"
+import Header from "./header"
 
 interface NeckProps {
   siteTitle?: string
@@ -9,17 +9,17 @@ interface NeckProps {
 const Neck: React.SFC<NeckProps> = ({ siteTitle }) => (
   <div
     style={{
-      margin: 'auto',
-      maxWidth: '40rem',
-      padding: '1.45rem 1.0875rem',
+      margin: "auto",
+      maxWidth: "40rem",
+      padding: "1.45rem 1.0875rem",
     }}
   >
     <h1 style={{ margin: 0 }}>
       <Link
         to="/"
         style={{
-          color: 'Black',
-          textDecoration: 'none',
+          color: "Black",
+          textDecoration: "none",
         }}
       >
         {siteTitle}
@@ -28,6 +28,6 @@ const Neck: React.SFC<NeckProps> = ({ siteTitle }) => (
   </div>
 )
 
-Header.defaultProps = { siteTitle: '' }
+Header.defaultProps = { siteTitle: "" }
 
 export default Neck

@@ -1,8 +1,8 @@
-import { graphql, Link, StaticQuery } from 'gatsby'
-import * as React from 'react'
-import Header from './header'
-import Neck from './neck'
-import { Search } from './search'
+import { graphql, Link, StaticQuery } from "gatsby"
+import * as React from "react"
+import Header from "./header"
+import Neck from "./neck"
+import { Search } from "./search"
 
 const Layout: React.SFC = ({ children }) => (
   <StaticQuery
@@ -23,9 +23,9 @@ const Layout: React.SFC = ({ children }) => (
 
         <div
           style={{
-            margin: '0 auto',
-            maxWidth: '55rem',
-            padding: '0px 1.0875rem 1.45rem',
+            margin: "0 auto",
+            maxWidth: "55rem",
+            padding: "0px 1.0875rem 1.45rem",
             paddingTop: 0,
           }}
         >

@@ -84,7 +84,7 @@ declare namespace __gatsby_lunr {
   }
 
   class QueryParseError extends Error {
-    readonly name: 'QueryParseError'
+    readonly name: "QueryParseError"
     readonly message: string
     readonly start: number
     readonly end: number
