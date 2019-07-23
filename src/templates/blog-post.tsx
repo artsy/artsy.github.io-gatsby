@@ -1,4 +1,5 @@
 import { graphql, Link } from "gatsby"
+import * as _ from "lodash"
 import * as React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -61,14 +62,20 @@ class BlogPostTemplate extends React.Component<BlogPostTemplateProps, {}> {
         >
           <li>
             {previous && (
-              <Link to={previous.frontmatter.title} rel="prev">
+              <Link
+                to={`/blogs/${_.kebabCase(previous.frontmatter.title)}`}
+                rel="prev"
+              >
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.frontmatter.title} rel="next">
+              <Link
+                to={`/blogs/${_.kebabCase(next.frontmatter.title)}`}
+                rel="next"
+              >
                 {next.frontmatter.title} →
               </Link>
             )}
