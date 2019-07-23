@@ -1,6 +1,7 @@
-import { graphql, Link } from 'gatsby'
-import * as React from 'react'
-import Layout from '../components/layout'
+import { graphql, Link } from "gatsby"
+import * as _ from "lodash"
+import * as React from "react"
+import Layout from "../components/layout"
 
 interface CategoriesTemp {
   data: {
@@ -19,11 +20,12 @@ class CateTemp extends React.Component<CategoriesTemp, {}> {
     return (
       <div>
         <Layout>
-          {allCate.map((theThing, index) => {
-            const singleTitle = theThing
+          {allCate.map((singleTitle, index) => {
             return (
               <div key={index}>
-                <Link to={theThing}>{singleTitle}</Link>
+                <Link to={`/blogs/${_.kebabCase(singleTitle)}`}>
+                  {singleTitle}
+                </Link>
               </div>
             )
           })}

@@ -1,7 +1,7 @@
-import { graphql, Link, StaticQuery } from 'gatsby'
-import React, { ChangeEvent } from 'react'
+import { graphql, Link, StaticQuery } from "gatsby"
+import React, { ChangeEvent } from "react"
 
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom"
 
 const search = (query: string): ReadonlyArray<SearchResult> => {
   const { index, store } = window.__LUNR__ && window.__LUNR__.en
@@ -22,7 +22,7 @@ interface LunrSearchState {
 export class Search extends React.Component<LunrSearchProps, LunrSearchState> {
   public readonly state: LunrSearchState = {
     isActive: false,
-    query: '',
+    query: "",
     results: [],
   }
 
@@ -40,11 +40,11 @@ export class Search extends React.Component<LunrSearchProps, LunrSearchState> {
   }
 
   componentDidMount() {
-    document.addEventListener('click', this.handleClickOutside, true)
+    document.addEventListener("click", this.handleClickOutside, true)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.handleClickOutside, true)
+    document.removeEventListener("click", this.handleClickOutside, true)
   }
 
   render() {
@@ -72,8 +72,8 @@ export class Search extends React.Component<LunrSearchProps, LunrSearchState> {
               </li>
             ))}
             <li>
-              Showing {limit ? `${Math.min(limit, count)} of` : null} {count}{' '}
-              {count === 1 ? 'result' : 'results'}.
+              Showing {limit ? `${Math.min(limit, count)} of` : null} {count}{" "}
+              {count === 1 ? "result" : "results"}.
             </li>
           </ul>
         ) : null}

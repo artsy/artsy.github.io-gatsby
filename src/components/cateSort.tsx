@@ -16,7 +16,8 @@ export class CateSort extends React.Component<CateSortProps, {}> {
         {currentIndex.charAt(0) !== preIndex.charAt(0) && (
           <Showletter letter={currentIndex} />
         )}
-        <Link to={currentIndex}>{currentIndex}</Link> : {numOfBlog}.
+        <Link to={`/categories/${currentIndex}`}>{currentIndex}</Link> :{" "}
+        {numOfBlog}.
       </div>
     )
   }

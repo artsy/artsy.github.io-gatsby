@@ -1,7 +1,8 @@
-import { graphql, Link } from 'gatsby'
-import * as React from 'react'
-import Layout from '../components/layout'
-import SEO from '../components/seo'
+import { graphql, Link } from "gatsby"
+import * as _ from "lodash"
+import * as React from "react"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 interface PostNode {
   node: {
@@ -40,7 +41,7 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
         <Layout>
           <SEO
             title="All posts"
-            keywords={['artsy', 'blog', 'gatsby', 'javascript', 'react']}
+            keywords={["artsy", "blog", "gatsby", "javascript", "react"]}
           />
 
           {posts.map(({ node }) => {
@@ -52,10 +53,10 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
               <div key={node.fields.slug}>
                 <h3
                   style={{
-                    marginBottom: '0.25rem',
+                    marginBottom: "0.25rem",
                   }}
                 >
-                  <Link to={title}>{title}</Link>
+                  <Link to={`/blogs/${_.kebabCase(title)}`}>{title}</Link>
                 </h3>
                 <small>{node.frontmatter.date}</small>
                 <br />
