@@ -27,8 +27,6 @@ class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
           <h3>Categorie we have :</h3>
 
           <ul>
-            <h1>a</h1>
-            -----------------------------------------
             {amd.group.map((cateSingle, index) => (
               <li key={index}>
                 <CateSort
@@ -39,6 +37,7 @@ class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
                       : amd.group[index - 1].fieldValue
                   }
                   numOfBlog={cateSingle.totalCount}
+                  index={index}
                 />
 
                 <br />

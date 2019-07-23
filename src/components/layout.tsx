@@ -31,6 +31,8 @@ const Layout: React.SFC = ({ children }) => (
         >
           <h2>
             <Link to="/categories">categories page! </Link>
+            <br />
+            <Link to="/archives">archives page!</Link>
           </h2>
           {children}
         </div>
