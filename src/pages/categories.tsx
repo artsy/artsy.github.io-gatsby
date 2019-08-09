@@ -1,6 +1,6 @@
 import { graphql, Link } from "gatsby"
 import * as React from "react"
-import CateSort from "../components/cateSort"
+import CategorySort from "../components/CategorySort"
 import Layout from "../components/layout"
 
 interface CategoriesPageProps {
@@ -29,7 +29,7 @@ class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
           <ul>
             {amd.group.map((cateSingle, index) => (
               <li key={index}>
-                <CateSort
+                <CategorySort
                   currentIndex={cateSingle.fieldValue}
                   preIndex={
                     index < 1

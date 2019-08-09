@@ -2,7 +2,7 @@ import { graphql, Link } from "gatsby"
 import * as _ from "lodash"
 import * as React from "react"
 import Layout from "../components/layout"
-import ArchivesSort from "../components/archivesSort"
+import ArchivesSort from "../components/ArchivesSort"
 
 interface ArchivesPageProps {
   data: {
@@ -20,7 +20,7 @@ interface ArchivesPageProps {
   }
 }
 
-class CategoriesPage extends React.Component<ArchivesPageProps, {}> {
+class Archives extends React.Component<ArchivesPageProps, {}> {
   render() {
     const { data } = this.props
     const temp = data.allMarkdownRemark.nodes
@@ -44,7 +44,7 @@ class CategoriesPage extends React.Component<ArchivesPageProps, {}> {
   }
 }
 
-export default CategoriesPage
+export default Archives
 
 export const archivesQueue = graphql`
   query archivesQueue {
