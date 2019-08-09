@@ -19,7 +19,7 @@ interface CategoriesPageProps {
 class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
   render() {
     const { data } = this.props
-    const amd = data.allMarkdownRemark
+    const allMarkDown = data.allMarkdownRemark
 
     return (
       <div>
@@ -27,17 +27,14 @@ class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
           <h3>Categorie we have :</h3>
 
           <ul>
-            {amd.group.map((cateSingle, index) => (
+            {allMarkDown.group.map((singleCategory, index) => (
               <li key={index}>
                 <CategorySort
-                  currentIndex={cateSingle.fieldValue}
-                  preIndex={
-                    index < 1
-                      ? amd.group[index].fieldValue
-                      : amd.group[index - 1].fieldValue
+                  currentIndex={singleCategory.fieldValue}
+                  preLetter={
+                    index < 1 ? "" : allMarkDown.group[index - 1].fieldValue
                   }
-                  numOfBlog={cateSingle.totalCount}
-                  index={index}
+                  numOfBlog={singleCategory.totalCount}
                 />
 
                 <br />

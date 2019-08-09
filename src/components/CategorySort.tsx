@@ -3,9 +3,8 @@ import * as React from "react"
 
 interface CategorySortProps {
   readonly currentIndex: string
-  readonly preIndex: string
+  readonly preLetter: string
   readonly numOfBlog: number
-  readonly index: number
 }
 
 interface ShowLetterProps {
@@ -14,14 +13,12 @@ interface ShowLetterProps {
 
 export const CategorySort: React.SFC<CategorySortProps> = ({
   currentIndex,
-  preIndex,
+  preLetter,
   numOfBlog,
-  index,
 }) => {
   return (
     <div>
-      {index === 0 && <ShowLetter letter={currentIndex} />}
-      {currentIndex.charAt(0) !== preIndex.charAt(0) && (
+      {currentIndex.charAt(0) !== preLetter.charAt(0) && (
         <ShowLetter letter={currentIndex} />
       )}
       <Link to={`/categories/${currentIndex}`}>{currentIndex}</Link> :{" "}

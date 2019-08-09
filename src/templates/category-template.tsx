@@ -3,24 +3,23 @@ import * as _ from "lodash"
 import * as React from "react"
 import Layout from "../components/layout"
 
-interface CategoriesTemp {
+interface CategoriesTemplate {
   data: {
     allMarkdownRemark: {
       distinct: string[]
-      edges: node[]
     }
   }
 }
 
-class CateTemp extends React.Component<CategoriesTemp, {}> {
+class CategoriesTemplate extends React.Component<CategoriesTemplate, {}> {
   render() {
     const { data } = this.props
-    const allCate = data.allMarkdownRemark.distinct
+    const allTitle = data.allMarkdownRemark.distinct
 
     return (
       <div>
         <Layout>
-          {allCate.map((singleTitle, index) => {
+          {allTitle.map((singleTitle, index) => {
             return (
               <div key={index}>
                 <Link to={`/blogs/${_.kebabCase(singleTitle)}`}>
@@ -35,24 +34,8 @@ class CateTemp extends React.Component<CategoriesTemp, {}> {
   }
 }
 
-export default CateTemp
+export default CategoriesTemplate
 
-// export const pageQuery = graphql`
-//     query catePageQuery($cate:String!){
-//         allMarkdownRemark(filter:{frontmatter:{categories:{eq:$cate}}}){
-//             distinct:(field:frontmatter___title)
-//             edges{
-//                 node{
-//                     frontmatter{
-//                         anthor
-//                         title
-//                         date(formatString:"YYYY")
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// `
 export const pageQuery = graphql`
   query catePageQuery($cate: String!) {
     allMarkdownRemark(filter: { frontmatter: { categories: { eq: $cate } } }) {

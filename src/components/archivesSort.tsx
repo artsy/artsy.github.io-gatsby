@@ -3,10 +3,10 @@ import { Link } from "gatsby"
 import * as _ from "lodash"
 
 interface ArchivesSortProps {
-  readonly currentNode: Posts
-  readonly preNode: Posts
-  readonly index: number
+  readonly currentPost: Posts
+  readonly preDate: string
 }
+
 interface Posts {
   frontmatter: {
     readonly author: string[]
@@ -18,18 +18,17 @@ interface Posts {
 interface ShowYearProps {
   year: string
 }
+
 export const ArchivesSort: React.SFC<ArchivesSortProps> = ({
-  currentNode,
-  preNode,
-  index,
+  currentPost,
+  preDate,
 }) => {
   const {
     frontmatter: { title, date, author },
-  } = currentNode
-  const preDate = preNode.frontmatter.date
+  } = currentPost
+
   return (
     <div>
-      {index === 0 && <ShowYear year={date} />}
       {date !== preDate && <ShowYear year={date} />}
       <Link to={`/blogs/${_.kebabCase(title)}`}>
         <big>{title}</big>
