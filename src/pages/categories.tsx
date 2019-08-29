@@ -1,7 +1,7 @@
 import { graphql, Link } from "gatsby"
 import * as React from "react"
 import CategorySort from "../components/CategorySort"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 interface CategoriesPageProps {
   readonly data: {

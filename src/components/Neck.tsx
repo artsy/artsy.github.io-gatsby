@@ -1,6 +1,6 @@
-import { graphql, Link, StaticQuery } from "gatsby"
+import { Link } from "gatsby"
 import React from "react"
-import Header from "./header"
+import Header from "./Header"
 
 interface NeckProps {
   siteTitle?: string

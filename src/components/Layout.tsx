@@ -1,8 +1,8 @@
 import { graphql, Link, StaticQuery } from "gatsby"
 import * as React from "react"
-import Header from "./header"
-import Neck from "./neck"
-import { Search } from "./search"
+import Header from "./Header"
+import Neck from "./Neck"
+import { Search } from "./Search"
 
 const Layout: React.SFC = ({ children }) => (
   <StaticQuery

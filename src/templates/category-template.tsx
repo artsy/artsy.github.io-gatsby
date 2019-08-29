@@ -1,7 +1,7 @@
 import { graphql, Link } from "gatsby"
 import * as _ from "lodash"
 import * as React from "react"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 interface CategoriesTemplate {
   data: {
