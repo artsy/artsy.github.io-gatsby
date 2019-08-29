@@ -21,7 +21,7 @@ export const CategorySort: React.SFC<CategorySortProps> = ({
       {currentIndex.charAt(0) !== preLetter.charAt(0) && (
         <ShowLetter letter={currentIndex} />
       )}
-      <Link to={`/categories/${currentIndex}`}>{currentIndex}</Link> :{" "}
+      <Link to={`/Categories/${currentIndex}`}>{currentIndex}</Link> :{" "}
       {numOfBlog}.
     </div>
   )

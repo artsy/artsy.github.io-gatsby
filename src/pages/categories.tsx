@@ -16,7 +16,7 @@ interface CategoriesPageProps {
   }
 }
 
-class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
+class Categories extends React.Component<CategoriesPageProps, {}> {
   render() {
     const { data } = this.props
     const allMarkDown = data.allMarkdownRemark
@@ -47,7 +47,7 @@ class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
   }
 }
 
-export default CategoriesPage
+export default Categories
 
 export const pageQuery = graphql`
   query {

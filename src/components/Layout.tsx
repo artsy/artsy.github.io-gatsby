@@ -30,9 +30,9 @@ const Layout: React.SFC = ({ children }) => (
           }}
         >
           <h2>
-            <Link to="/categories">categories page! </Link>
+            <Link to="/Categories">categories page! </Link>
             <br />
-            <Link to="/archives">archives page!</Link>
+            <Link to="/Archives">archives page!</Link>
           </h2>
           {children}
         </div>

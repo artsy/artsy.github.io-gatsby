@@ -43,7 +43,7 @@ exports.createPages = ({ graphql, actions }) => {
         const posts = result.data.allMarkdownRemark.edges
 
         result.data.allMarkdownRemark.group.forEach(cate => {
-          const path = `/categories/${cate.fieldValue}`
+          const path = `/Categories/${cate.fieldValue}`
           createPage({
             path,
             component: catePage,
