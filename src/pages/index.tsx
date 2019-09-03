@@ -1,8 +1,8 @@
 import { graphql, Link } from "gatsby"
 import * as _ from "lodash"
 import * as React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import SEO from "../components/Seo"
 
 interface PostNode {
   node: {

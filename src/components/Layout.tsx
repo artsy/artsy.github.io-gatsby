@@ -1,8 +1,8 @@
 import { graphql, Link, StaticQuery } from "gatsby"
 import * as React from "react"
-import Header from "./header"
-import Neck from "./neck"
-import { Search } from "./search"
+import Header from "./Header"
+import Neck from "./Neck"
+import { Search } from "./Search"
 
 const Layout: React.SFC = ({ children }) => (
   <StaticQuery
@@ -31,6 +31,8 @@ const Layout: React.SFC = ({ children }) => (
         >
           <h2>
             <Link to="/categories">categories page! </Link>
+            <br />
+            <Link to="/archives">archives page!</Link>
           </h2>
           {children}
         </div>

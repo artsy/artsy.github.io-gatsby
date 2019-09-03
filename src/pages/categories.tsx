@@ -1,7 +1,7 @@
 import { graphql, Link } from "gatsby"
 import * as React from "react"
-import CateSort from "../components/cateSort"
-import Layout from "../components/layout"
+import CategorySort from "../components/CategorySort"
+import Layout from "../components/Layout"
 
 interface CategoriesPageProps {
   readonly data: {
@@ -16,10 +16,10 @@ interface CategoriesPageProps {
   }
 }
 
-class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
+class Categories extends React.Component<CategoriesPageProps, {}> {
   render() {
     const { data } = this.props
-    const amd = data.allMarkdownRemark
+    const allMarkDown = data.allMarkdownRemark
 
     return (
       <div>
@@ -27,18 +27,14 @@ class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
           <h3>Categorie we have :</h3>
 
           <ul>
-            <h1>a</h1>
-            -----------------------------------------
-            {amd.group.map((cateSingle, index) => (
+            {allMarkDown.group.map((singleCategory, index) => (
               <li key={index}>
-                <CateSort
-                  currentIndex={cateSingle.fieldValue}
-                  preIndex={
-                    index < 1
-                      ? amd.group[index].fieldValue
-                      : amd.group[index - 1].fieldValue
+                <CategorySort
+                  currentIndex={singleCategory.fieldValue}
+                  preLetter={
+                    index < 1 ? "" : allMarkDown.group[index - 1].fieldValue
                   }
-                  numOfBlog={cateSingle.totalCount}
+                  numOfBlog={singleCategory.totalCount}
                 />
 
                 <br />
@@ -51,7 +47,7 @@ class CategoriesPage extends React.Component<CategoriesPageProps, {}> {
   }
 }
 
-export default CategoriesPage
+export default Categories
 
 export const pageQuery = graphql`
   query {
