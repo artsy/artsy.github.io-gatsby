@@ -33,9 +33,7 @@ class CategoriesTemplate extends React.Component<CategoriesTemplate, {}> {
               <div key={index}>
                 <ArchivesSort
                   currentPost={singleNode}
-                  preDate={
-                    index < 1 ? "empty" : nodes[index - 1].frontmatter.date
-                  }
+                  preDate={index < 1 ? null : nodes[index - 1].frontmatter.date}
                 />
               </div>
             )
