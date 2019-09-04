@@ -1,6 +1,6 @@
-import * as React from "react"
 import { Link } from "gatsby"
 import * as _ from "lodash"
+import * as React from "react"
 
 interface ArchivesSortProps {
   readonly currentPost: Posts

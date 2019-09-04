@@ -1,6 +1,11 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-prettier",
+    "prettier/recommended"
+  ],
   "jsRules": {},
   "rules": {
     "interface-name": false,
@@ -10,7 +15,7 @@
     "no-console": [false],
     "no-var-requires": true,
     "jsx-no-lambda": false,
-    "quotemark": [true, "single", "jsx-double"]
+    "quotemark": [true, "double", "jsx-double"]
   },
   "rulesDirectory": []
 }

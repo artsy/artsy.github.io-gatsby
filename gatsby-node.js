@@ -8,6 +8,7 @@ exports.createPages = ({ graphql, actions }) => {
   return new Promise((resolve, reject) => {
     const blogPost = path.resolve("./src/templates/blog-post.tsx")
     const catePage = path.resolve("./src/templates/category-template.tsx")
+    const authorPage = path.resolve("./src/templates/author.tsx")
 
     resolve(
       graphql(
@@ -39,10 +40,10 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        // Create blog posts pages.
+        const category = result.data.allMarkdownRemark.group
         const posts = result.data.allMarkdownRemark.edges
 
-        result.data.allMarkdownRemark.group.forEach(cate => {
+        category.forEach(cate => {
           const path = `/Categories/${cate.fieldValue}`
           createPage({
             path,
@@ -66,6 +67,49 @@ exports.createPages = ({ graphql, actions }) => {
               slug: post.node.fields.slug,
               previous,
               next,
+            },
+          })
+        })
+      })
+    )
+  })
+}
+
+exports.createAuthorPages = ({ graphql, actions }) => {
+  const { createPage } = actions
+
+  return new Promise((resolve, reject) => {
+    const authorPage = path.resolve("./src/templates/author.tsx")
+
+    resolve(
+      graphql(
+        `
+          {
+            allMarkdownRemark(
+              sort: { fields: [frontmatter___date], order: DESC }
+              limit: 1000
+            ) {
+              group(field: frontmatter___author) {
+                fieldValue
+              }
+            }
+          }
+        `
+      ).then(result => {
+        if (result.errors) {
+          console.log(result.errors)
+          reject(result.errors)
+        }
+
+        const authors = result.data.allMarkdownRemark.group
+
+        authors.forEach(author => {
+          const path = `/authors/${author.fieldValue}`
+          createPage({
+            path,
+            component: authorPage,
+            context: {
+              cate: author.fieldValue,
             },
           })
         })
