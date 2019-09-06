@@ -31,9 +31,8 @@ export const ArchivesSort: React.SFC<ArchivesSortProps> = ({
     <div>
       {date !== preDate && <ShowYear year={date} />}
       <Link to={`/blogs/${_.kebabCase(title)}`}>
-        <big>{title}</big>
+        <big>{`${title} - ${author} ${date}`}</big>
       </Link>
-      <small>{author}</small>
     </div>
   )
 }
