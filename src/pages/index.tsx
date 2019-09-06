@@ -10,12 +10,16 @@ interface PostNode {
     frontmatter: {
       date: string
       title: string
-      author: string
+      author: singleAuthor[]
     }
     fields: {
       slug: string
     }
   }
+}
+
+interface singleAuthor {
+  author: string
 }
 
 interface IndexPageProps {
@@ -46,8 +50,7 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
 
           {posts.map(({ node }) => {
             const title = node.frontmatter.title || node.fields.slug
-            const temp = node.frontmatter.author
-            const author = temp
+            const authors = node.frontmatter.author
 
             return (
               <div key={node.fields.slug}>
@@ -60,7 +63,21 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
                 </h3>
                 <small>{node.frontmatter.date}</small>
                 <br />
-                <small>{author}</small>
+
+                {authors.map((author, index) => {
+                  return (
+                    <div key={index}>
+                      <br />
+                      <Link
+                        to={`/authors/${_.kebabCase(author)}`}
+                        state={{ name: author }}
+                      >
+                        <small>{author}</small>
+                      </Link>
+                    </div>
+                  )
+                })}
+
                 <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
               </div>
             )

@@ -8,7 +8,7 @@ exports.createPages = ({ graphql, actions }) => {
   return new Promise((resolve, reject) => {
     const blogPost = path.resolve("./src/templates/blog-post.tsx")
     const catePage = path.resolve("./src/templates/category-template.tsx")
-    const authorPage = path.resolve("./src/templates/author.tsx")
+    const authorPage = path.resolve("./src/templates/author-template.tsx")
 
     resolve(
       graphql(
@@ -59,7 +59,6 @@ exports.createPages = ({ graphql, actions }) => {
             index === posts.length - 1 ? null : posts[index + 1].node
           const next = index === 0 ? null : posts[index - 1].node
           const blogPath = `/blogs/${_.kebabCase(post.node.frontmatter.title)}`
-
           createPage({
             path: blogPath,
             component: blogPost,
@@ -72,23 +71,11 @@ exports.createPages = ({ graphql, actions }) => {
         })
       })
     )
-  })
-}
-
-exports.createAuthorPages = ({ graphql, actions }) => {
-  const { createPage } = actions
-
-  return new Promise((resolve, reject) => {
-    const authorPage = path.resolve("./src/templates/author.tsx")
-
     resolve(
       graphql(
         `
           {
-            allMarkdownRemark(
-              sort: { fields: [frontmatter___date], order: DESC }
-              limit: 1000
-            ) {
+            allMarkdownRemark(limit: 1000) {
               group(field: frontmatter___author) {
                 fieldValue
               }
@@ -109,7 +96,7 @@ exports.createAuthorPages = ({ graphql, actions }) => {
             path,
             component: authorPage,
             context: {
-              cate: author.fieldValue,
+              author: author.fieldValue,
             },
           })
         })
