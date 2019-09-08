@@ -40,16 +40,16 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const category = result.data.allMarkdownRemark.group
+        const categories = result.data.allMarkdownRemark.group
         const posts = result.data.allMarkdownRemark.edges
 
-        category.forEach(cate => {
-          const path = `/Categories/${cate.fieldValue}`
+        categories.forEach(category => {
+          const path = `/Categories/${category.fieldValue}`
           createPage({
             path,
             component: catePage,
             context: {
-              cate: cate.fieldValue,
+              category: category.fieldValue,
             },
           })
         })

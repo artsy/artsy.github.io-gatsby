@@ -37,8 +37,10 @@ class CategoriesTemplate extends React.Component<CategoriesTemplate, {}> {
 export default CategoriesTemplate
 
 export const pageQuery = graphql`
-  query catePageQuery($cate: String!) {
-    allMarkdownRemark(filter: { frontmatter: { categories: { eq: $cate } } }) {
+  query catePageQuery($category: String!) {
+    allMarkdownRemark(
+      filter: { frontmatter: { categories: { eq: $category } } }
+    ) {
       distinct(field: frontmatter___title)
     }
   }

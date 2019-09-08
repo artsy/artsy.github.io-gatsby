@@ -3,8 +3,12 @@ import * as _ from "lodash"
 import * as React from "react"
 import Layout from "../components/Layout"
 
-interface CategoriesTemplateProp {
-  location: any
+interface AuthorTemplateProp {
+  location: {
+    state: {
+      name: string
+    }
+  }
   data: {
     allMarkdownRemark: {
       nodes: [
@@ -20,32 +24,32 @@ interface CategoriesTemplateProp {
   }
 }
 
-class CategoriesTemplate extends React.Component<CategoriesTemplateProp, {}> {
-  render() {
-    const { data } = this.props
-    const allNodes = data.allMarkdownRemark.nodes
-    const { location } = this.props
-    return (
-      <div>
-        <Layout>
-          <h1>{location.state.name} : </h1>
-          {allNodes.map((singleNode, index) => {
-            const { date, title } = singleNode.frontmatter
+const AuthorPageTemplate: React.FC<AuthorTemplateProp> = ({
+  location,
+  data,
+}) => {
+  const allNodes = data.allMarkdownRemark.nodes
+  const authorName = location.state.name
 
-            return (
-              <div key={index}>
-                <Link to={`/blogs/${_.kebabCase(title)}`}>{title}</Link>
-                <small>{date}</small>
-              </div>
-            )
-          })}
-        </Layout>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Layout>
+        <h1>{authorName}:</h1>
+        {allNodes.map((singleNode, index) => {
+          const { date, title } = singleNode.frontmatter
+          return (
+            <div key={index}>
+              <Link to={`/blogs/${_.kebabCase(title)}`}>{title}</Link>
+              <small>{date}</small>
+            </div>
+          )
+        })}
+      </Layout>
+    </div>
+  )
 }
 
-export default CategoriesTemplate
+export default AuthorPageTemplate
 
 export const pageQuery = graphql`
   query authorPageQuery($author: String!) {
