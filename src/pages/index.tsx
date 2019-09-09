@@ -10,7 +10,7 @@ interface PostNode {
     frontmatter: {
       date: string
       title: string
-      author: singleAuthor[]
+      author: SingleAuthor[]
     }
     fields: {
       slug: string
@@ -18,7 +18,7 @@ interface PostNode {
   }
 }
 
-interface singleAuthor {
+interface SingleAuthor {
   author: string
 }
 
