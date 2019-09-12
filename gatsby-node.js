@@ -2,106 +2,92 @@ const path = require("path")
 const _ = require("lodash")
 const { createFilePath } = require("gatsby-source-filesystem")
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-
-  return new Promise((resolve, reject) => {
-    const blogPost = path.resolve("./src/templates/blog-post.tsx")
-    const catePage = path.resolve("./src/templates/category-template.tsx")
-    const authorPage = path.resolve("./src/templates/author-template.tsx")
-
-    resolve(
-      graphql(
-        `
-          {
-            allMarkdownRemark(
-              sort: { fields: [frontmatter___date], order: DESC }
-              limit: 1000
-            ) {
-              group(field: frontmatter___categories) {
-                fieldValue
+  const firstPromise = await graphql(
+    `
+      {
+        allMarkdownRemark(
+          sort: { fields: [frontmatter___date], order: DESC }
+          limit: 1000
+        ) {
+          group(field: frontmatter___categories) {
+            fieldValue
+          }
+          edges {
+            node {
+              fields {
+                slug
               }
-              edges {
-                node {
-                  fields {
-                    slug
-                  }
-                  frontmatter {
-                    title
-                  }
-                }
+              frontmatter {
+                title
               }
             }
           }
-        `
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
         }
-
-        const categories = result.data.allMarkdownRemark.group
-        const posts = result.data.allMarkdownRemark.edges
-
-        categories.forEach(category => {
-          const path = `/Categories/${category.fieldValue}`
-          createPage({
-            path,
-            component: catePage,
-            context: {
-              category: category.fieldValue,
-            },
-          })
-        })
-
-        posts.forEach((post, index) => {
-          const previous =
-            index === posts.length - 1 ? null : posts[index + 1].node
-          const next = index === 0 ? null : posts[index - 1].node
-          const blogPath = `/blogs/${_.kebabCase(post.node.frontmatter.title)}`
-          createPage({
-            path: blogPath,
-            component: blogPost,
-            context: {
-              slug: post.node.fields.slug,
-              previous,
-              next,
-            },
-          })
-        })
-      })
-    )
-    resolve(
-      graphql(
-        `
-          {
-            allMarkdownRemark(limit: 1000) {
-              group(field: frontmatter___author) {
-                fieldValue
-              }
-            }
+      }
+    `
+  )
+  if (firstPromise.errors) {
+    reporter.panicOnBuild(`Error while running Graphql query.`)
+  }
+  const secondPromise = await graphql(
+    `
+      {
+        allMarkdownRemark(limit: 1000) {
+          group(field: frontmatter___author) {
+            fieldValue
           }
-        `
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
         }
+      }
+    `
+  )
+  if (secondPromise.errors) {
+    reporter.panicOnBuild(`Error while running Graphql query.`)
+  }
+  const blogPost = path.resolve("./src/templates/blog-post.tsx")
+  const catePage = path.resolve("./src/templates/category-template.tsx")
+  const authorPage = path.resolve("./src/templates/author-template.tsx")
 
-        const authors = result.data.allMarkdownRemark.group
+  const categories = firstPromise.data.allMarkdownRemark.group
+  const posts = firstPromise.data.allMarkdownRemark.edges
+  const authors = secondPromise.data.allMarkdownRemark.group
 
-        authors.forEach(author => {
-          const path = `/authors/${author.fieldValue}`
-          createPage({
-            path,
-            component: authorPage,
-            context: {
-              author: author.fieldValue,
-            },
-          })
-        })
-      })
-    )
+  categories.forEach(category => {
+    const path = `/Categories/${category.fieldValue}`
+    createPage({
+      path,
+      component: catePage,
+      context: {
+        category: category.fieldValue,
+      },
+    })
+  })
+
+  posts.forEach((post, index) => {
+    const previous = index === posts.length - 1 ? null : posts[index + 1].node
+    const next = index === 0 ? null : posts[index - 1].node
+    const blogPath = `/blogs/${_.kebabCase(post.node.frontmatter.title)}`
+    createPage({
+      path: blogPath,
+      component: blogPost,
+      context: {
+        slug: post.node.fields.slug,
+        previous,
+        next,
+      },
+    })
+  })
+
+  authors.forEach(author => {
+    const path = `/authors/${author.fieldValue}`
+    createPage({
+      path,
+      component: authorPage,
+      context: {
+        author: author.fieldValue,
+      },
+    })
   })
 }
 
