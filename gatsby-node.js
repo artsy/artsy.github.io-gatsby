@@ -4,14 +4,17 @@ const { createFilePath } = require("gatsby-source-filesystem")
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-  const firstPromise = await graphql(
+  const result = await graphql(
     `
       {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
-          group(field: frontmatter___categories) {
+          categories: group(field: frontmatter___categories) {
+            fieldValue
+          }
+          authors: group(field: frontmatter___author) {
             fieldValue
           }
           edges {
@@ -28,41 +31,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     `
   )
-  if (firstPromise.errors) {
+  if (result.errors) {
     reporter.panicOnBuild(`Error while running Graphql query.`)
   }
-  const secondPromise = await graphql(
-    `
-      {
-        allMarkdownRemark(limit: 1000) {
-          group(field: frontmatter___author) {
-            fieldValue
-          }
-        }
-      }
-    `
-  )
-  if (secondPromise.errors) {
-    reporter.panicOnBuild(`Error while running Graphql query.`)
-  }
+
   const blogPost = path.resolve("./src/templates/blog-post.tsx")
   const catePage = path.resolve("./src/templates/category-template.tsx")
   const authorPage = path.resolve("./src/templates/author-template.tsx")
 
-  const categories = firstPromise.data.allMarkdownRemark.group
-  const posts = firstPromise.data.allMarkdownRemark.edges
-  const authors = secondPromise.data.allMarkdownRemark.group
-
-  categories.forEach(category => {
-    const path = `/Categories/${category.fieldValue}`
-    createPage({
-      path,
-      component: catePage,
-      context: {
-        category: category.fieldValue,
-      },
-    })
-  })
+  const categories = result.data.allMarkdownRemark.categories
+  const posts = result.data.allMarkdownRemark.edges
+  const authors = result.data.allMarkdownRemark.authors
 
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
@@ -75,6 +54,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         slug: post.node.fields.slug,
         previous,
         next,
+      },
+    })
+  })
+
+  categories.forEach(category => {
+    const path = `/Categories/${category.fieldValue}`
+    createPage({
+      path,
+      component: catePage,
+      context: {
+        category: category.fieldValue,
       },
     })
   })
