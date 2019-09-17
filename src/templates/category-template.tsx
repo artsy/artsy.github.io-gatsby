@@ -1,30 +1,40 @@
 import { graphql, Link } from "gatsby"
 import * as _ from "lodash"
 import * as React from "react"
+import ArchivesSort from "../components/ArchivesSort"
 import Layout from "../components/Layout"
 
 interface CategoriesTemplate {
   data: {
     allMarkdownRemark: {
-      distinct: string[]
+      nodes: [
+        {
+          frontmatter: {
+            date: string
+            author: string[]
+            title: string
+          }
+        }
+      ]
     }
   }
 }
 
 class CategoriesTemplate extends React.Component<CategoriesTemplate, {}> {
   render() {
-    const { data } = this.props
-    const allTitle = data.allMarkdownRemark.distinct
+    const { nodes } = this.props.data.allMarkdownRemark
 
     return (
       <div>
         <Layout>
-          {allTitle.map((singleTitle, index) => {
+          {nodes.map((singleNode, index) => {
+            const { title, author, date } = singleNode.frontmatter
             return (
               <div key={index}>
-                <Link to={`/blogs/${_.kebabCase(singleTitle)}`}>
-                  {singleTitle}
-                </Link>
+                <ArchivesSort
+                  currentPost={singleNode}
+                  preDate={index < 1 ? null : nodes[index - 1].frontmatter.date}
+                />
               </div>
             )
           })}
@@ -39,9 +49,16 @@ export default CategoriesTemplate
 export const pageQuery = graphql`
   query catePageQuery($category: String!) {
     allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
       filter: { frontmatter: { categories: { eq: $category } } }
     ) {
-      distinct(field: frontmatter___title)
+      nodes {
+        frontmatter {
+          date(formatString: "YYYY")
+          author
+          title
+        }
+      }
     }
   }
 `
