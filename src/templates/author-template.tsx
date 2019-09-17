@@ -4,11 +4,6 @@ import * as React from "react"
 import Layout from "../components/Layout"
 
 interface AuthorTemplateProp {
-  location: {
-    state: {
-      name: string
-    }
-  }
   data: {
     allMarkdownRemark: {
       nodes: [
@@ -24,17 +19,19 @@ interface AuthorTemplateProp {
   }
 }
 
-const AuthorPageTemplate: React.FC<AuthorTemplateProp> = ({
-  location,
-  data,
-}) => {
+const AuthorPageTemplate: React.FC<AuthorTemplateProp> = ({ data }) => {
   const allNodes = data.allMarkdownRemark.nodes
-  const authorName = location.state.name
+  const [name, setName] = React.useState(undefined)
 
   return (
     <div>
       <Layout>
-        <h1>{authorName}:</h1>
+        <h1>
+          {React.useEffect(() => {
+            setName(localStorage.getItem("name"))
+          }, [])}
+          {name}:
+        </h1>
         {allNodes.map((singleNode, index) => {
           const { date, title } = singleNode.frontmatter
           return (

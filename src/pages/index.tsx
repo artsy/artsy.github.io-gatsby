@@ -3,6 +3,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
+import { string } from "prop-types"
 
 interface PostNode {
   node: {
@@ -19,7 +20,7 @@ interface PostNode {
 }
 
 interface SingleAuthor {
-  author: string
+  singleAuthor: string
 }
 
 interface IndexPageProps {
@@ -70,7 +71,9 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
                       <br />
                       <Link
                         to={`/authors/${_.kebabCase(author)}`}
-                        state={{ name: author }}
+                        onClick={() => {
+                          localStorage.setItem("name", `${_.kebabCase(author)}`)
+                        }}
                       >
                         <small>{author}</small>
                       </Link>
