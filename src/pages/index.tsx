@@ -3,15 +3,14 @@ import * as _ from "lodash"
 import * as React from "react"
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
-import { string } from "prop-types"
 
-interface PostNode {
+interface Post {
   node: {
     excerpt: string
     frontmatter: {
       date: string
       title: string
-      author: SingleAuthor[]
+      author: Author[]
     }
     fields: {
       slug: string
@@ -19,8 +18,8 @@ interface PostNode {
   }
 }
 
-interface SingleAuthor {
-  singleAuthor: string
+interface Author {
+  Author: string
 }
 
 interface IndexPageProps {
@@ -31,7 +30,7 @@ interface IndexPageProps {
       }
     }
     allMarkdownRemark: {
-      edges: PostNode[]
+      edges: Post[]
     }
   }
 }

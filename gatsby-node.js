@@ -12,10 +12,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           limit: 1000
         ) {
           categories: group(field: frontmatter___categories) {
-            fieldValue
+            name: fieldValue
           }
           authors: group(field: frontmatter___author) {
-            fieldValue
+            name: fieldValue
           }
           edges {
             node {
@@ -59,23 +59,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   categories.forEach(category => {
-    const path = `/Categories/${category.fieldValue}`
+    const path = `/categories/${_.kebabCase(category.name)}`
     createPage({
       path,
       component: catePage,
       context: {
-        category: category.fieldValue,
+        category: category.name,
       },
     })
   })
 
   authors.forEach(author => {
-    const path = `/authors/${author.fieldValue}`
+    const path = `/authors/${_.kebabCase(author.name)}`
     createPage({
       path,
       component: authorPage,
       context: {
-        author: author.fieldValue,
+        author: author.name,
       },
     })
   })
