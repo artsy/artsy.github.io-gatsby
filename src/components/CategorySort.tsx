@@ -1,5 +1,6 @@
 import { Link } from "gatsby"
 import * as React from "react"
+import * as _ from "lodash"
 
 interface CategorySortProps {
   readonly currentIndex: string
@@ -21,8 +22,10 @@ export const CategorySort: React.SFC<CategorySortProps> = ({
       {currentIndex.charAt(0) !== preLetter.charAt(0) && (
         <ShowLetter letter={currentIndex} />
       )}
-      <Link to={`/Categories/${currentIndex}`}>{currentIndex}</Link> :{" "}
-      {numOfBlog}.
+      <Link to={`/categories/${_.kebabCase(currentIndex)}`}>
+        {currentIndex}
+      </Link>{" "}
+      : {numOfBlog}.
     </div>
   )
 }

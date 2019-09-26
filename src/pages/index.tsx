@@ -4,18 +4,22 @@ import * as React from "react"
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
 
-interface PostNode {
+interface Post {
   node: {
     excerpt: string
     frontmatter: {
       date: string
       title: string
-      author: string
+      author: Author[]
     }
     fields: {
       slug: string
     }
   }
+}
+
+interface Author {
+  Author: string
 }
 
 interface IndexPageProps {
@@ -26,7 +30,7 @@ interface IndexPageProps {
       }
     }
     allMarkdownRemark: {
-      edges: PostNode[]
+      edges: Post[]
     }
   }
 }
@@ -46,8 +50,7 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
 
           {posts.map(({ node }) => {
             const title = node.frontmatter.title || node.fields.slug
-            const temp = node.frontmatter.author
-            const author = temp
+            const authors = node.frontmatter.author
 
             return (
               <div key={node.fields.slug}>
@@ -60,7 +63,23 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
                 </h3>
                 <small>{node.frontmatter.date}</small>
                 <br />
-                <small>{author}</small>
+
+                {authors.map((author, index) => {
+                  return (
+                    <div key={index}>
+                      <br />
+                      <Link
+                        to={`/authors/${_.kebabCase(author)}`}
+                        onClick={() => {
+                          localStorage.setItem("name", `${_.kebabCase(author)}`)
+                        }}
+                      >
+                        <small>{author}</small>
+                      </Link>
+                    </div>
+                  )
+                })}
+
                 <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
               </div>
             )
