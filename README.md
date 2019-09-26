@@ -13,6 +13,7 @@ Building...
 - [x] Author Page ( Multi-author ) 
 - [x] Pagination
 - [ ] Feed
+- [ ] Comment
 
 coming...
 - [ ] ?
