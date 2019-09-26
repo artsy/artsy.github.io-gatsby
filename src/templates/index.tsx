@@ -33,21 +33,47 @@ interface IndexPageProps {
       edges: Post[]
     }
   }
+  pageContext: {
+    numPages: any
+    currentPage: any
+  }
 }
 
 class IndexPage extends React.Component<IndexPageProps, {}> {
   render() {
     const { data } = this.props
     const posts = data.allMarkdownRemark.edges
+    const { currentPage, numPages } = this.props.pageContext
+    const isLast = currentPage === numPages
+    const nextPage = (currentPage + 1).toString()
+    const prevPage = 1 ? "" : (currentPage - 1).toString()
+    const isFirst = currentPage.toString() == "1"
 
     return (
       <div>
         <Layout>
+          {!isFirst && (
+            <Link to={prevPage} rel="prev">
+              Prev
+            </Link>
+          )}
+
+          {Array.from({ length: numPages }, (_, i) => (
+            <li key={`${i + 1}`} style={{ margin: 15 }}>
+              <Link to={`/${i === 0 ? "" : i + 1}`}>{i + 1}</Link>
+            </li>
+          ))}
+
+          {!isLast && (
+            <Link to={nextPage} rel="next">
+              Next
+            </Link>
+          )}
+
           <SEO
             title="All posts"
             keywords={["artsy", "blog", "gatsby", "javascript", "react"]}
           />
-
           {posts.map(({ node }) => {
             const title = node.frontmatter.title || node.fields.slug
             const authors = node.frontmatter.author
@@ -62,12 +88,14 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
                   <Link to={`/blogs/${_.kebabCase(title)}`}>{title}</Link>
                 </h3>
                 <small>{node.frontmatter.date}</small>
+
                 <br />
 
                 {authors.map((author, index) => {
                   return (
                     <div key={index}>
                       <br />
+
                       <Link
                         to={`/authors/${_.kebabCase(author)}`}
                         onClick={() => {
@@ -93,13 +121,17 @@ class IndexPage extends React.Component<IndexPageProps, {}> {
 export default IndexPage
 
 export const pageQuery = graphql`
-  query {
+  query blogPageQuery($skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
       edges {
         node {
           excerpt
