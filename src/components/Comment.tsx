@@ -38,7 +38,7 @@ const Comment: React.SFC<CommentProp> = ({ comment_id }) => {
             issues# {comment_id}
           </a>
         </h2>
-      ) : (
+      ) : comment_id ? (
         <h2>
           Our comments are using GitHub Issues on the Artsy Blog repo. You can
           post by replying to{" "}
@@ -48,7 +48,7 @@ const Comment: React.SFC<CommentProp> = ({ comment_id }) => {
             issues# {comment_id}
           </a>
         </h2>
-      )}
+      ) : null}
 
       {comment_id
         ? loading
