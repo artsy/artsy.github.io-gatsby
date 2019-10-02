@@ -84,6 +84,7 @@ module.exports = {
     },
     "@fec/gatsby-plugin-advanced-feed",
     "gatsby-plugin-typescript",
+    "gatsby-plugin-styled-components",
     "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-source-filesystem`,

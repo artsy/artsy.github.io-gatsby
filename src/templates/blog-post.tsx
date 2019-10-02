@@ -3,6 +3,7 @@ import * as _ from "lodash"
 import * as React from "react"
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
+import Comment from "../components/Comment"
 
 interface BlogPostTemplateProps {
   data: {
@@ -18,6 +19,7 @@ interface BlogPostTemplateProps {
       frontmatter: {
         title: string
         date: string
+        comment_id?: string
       }
     }
   }
@@ -81,6 +83,7 @@ class BlogPostTemplate extends React.Component<BlogPostTemplateProps, {}> {
             )}
           </li>
         </ul>
+        <Comment comment_id={post.frontmatter.comment_id} />
       </Layout>
     )
   }
@@ -102,6 +105,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        comment_id
       }
     }
   }
