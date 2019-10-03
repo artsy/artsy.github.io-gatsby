@@ -22,27 +22,28 @@ interface AuthorTemplateProp {
 const AuthorPageTemplate: React.FC<AuthorTemplateProp> = ({ data }) => {
   const allNodes = data.allMarkdownRemark.nodes
   const [name, setName] = React.useState(undefined)
+  const re_rerenderName = () => {
+    React.useEffect(() => {
+      setName(localStorage.getItem("name"))
+    }, [])
+  }
 
   return (
-    <div>
-      <Layout>
-        <h1>
-          {React.useEffect(() => {
-            setName(localStorage.getItem("name"))
-          }, [])}
-          {name}:
-        </h1>
-        {allNodes.map((singleNode, index) => {
-          const { date, title } = singleNode.frontmatter
-          return (
-            <div key={index}>
-              <Link to={`/blogs/${_.kebabCase(title)}`}>{title}</Link>
-              <small>{date}</small>
-            </div>
-          )
-        })}
-      </Layout>
-    </div>
+    <Layout>
+      <h1>
+        {re_rerenderName()}
+        {name}:
+      </h1>
+      {allNodes.map((singleNode, index) => {
+        const { date, title } = singleNode.frontmatter
+        return (
+          <div key={index}>
+            <Link to={`/blogs/${_.kebabCase(title)}`}>{title}</Link>
+            <small>{date}</small>
+          </div>
+        )
+      })}
+    </Layout>
   )
 }
 
