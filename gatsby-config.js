@@ -3,7 +3,7 @@ module.exports = {
     title: "Artsy Engineering blog",
     description: "Engineering blog!",
     author: "@Artsy",
-    email: "test@test.com",
+    email: "TBD",
     siteUrl: "https://www.artsy.net/",
   },
   plugins: [
