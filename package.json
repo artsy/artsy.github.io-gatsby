@@ -75,8 +75,5 @@
     "singleQuote": false,
     "trailingComma": "es5",
     "bracketSpacing": true
-  },
-  "resolutions": {
-    "version": "14.5.6"
   }
 }
