@@ -3,8 +3,6 @@ module.exports = {
     title: "Artsy Engineering blog",
     description: "Engineering blog!",
     author: "@Artsy",
-    email: "test@test.com",
-    siteUrl: "https://www.artsy.net/",
   },
   plugins: [
     {
@@ -82,7 +80,6 @@ module.exports = {
         ],
       },
     },
-    "@fec/gatsby-plugin-advanced-feed",
     "gatsby-plugin-typescript",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-react-helmet",
