@@ -22,13 +22,16 @@ interface AuthorTemplateProp {
 const AuthorPageTemplate: React.FC<AuthorTemplateProp> = ({ data }) => {
   const allNodes = data.allMarkdownRemark.nodes
   const [name, setName] = React.useState(undefined)
+  const re_rerenderName = () => {
+    React.useEffect(() => {
+      setName(localStorage.getItem("name"))
+    }, [])
+  }
 
   return (
     <Layout>
       <h1>
-        {React.useEffect(() => {
-          setName(localStorage.getItem("name"))
-        }, [])}
+        {re_rerenderName()}
         {name}:
       </h1>
       {allNodes.map((singleNode, index) => {
