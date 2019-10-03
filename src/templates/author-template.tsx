@@ -24,23 +24,25 @@ const AuthorPageTemplate: React.FC<AuthorTemplateProp> = ({ data }) => {
   const [name, setName] = React.useState(undefined)
 
   return (
-    <Layout>
-      <h1>
-        {React.useEffect(() => {
-          setName(localStorage.getItem("name"))
-        }, [])}
-        {name}:
-      </h1>
-      {allNodes.map((singleNode, index) => {
-        const { date, title } = singleNode.frontmatter
-        return (
-          <div key={index}>
-            <Link to={`/blogs/${_.kebabCase(title)}`}>{title}</Link>
-            <small>{date}</small>
-          </div>
-        )
-      })}
-    </Layout>
+    <>
+      <Layout>
+        <h1>
+          {React.useEffect(() => {
+            setName(localStorage.getItem("name"))
+          }, [])}
+          {name}:
+        </h1>
+        {allNodes.map((singleNode, index) => {
+          const { date, title } = singleNode.frontmatter
+          return (
+            <div key={index}>
+              <Link to={`/blogs/${_.kebabCase(title)}`}>{title}</Link>
+              <small>{date}</small>
+            </div>
+          )
+        })}
+      </Layout>
+    </>
   )
 }
 
